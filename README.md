@@ -165,37 +165,28 @@ Input format:
 
 ---
 
-## 📣 News
-
-| Date | Update |
-|------|--------|
-| **2025.11** | 🎉 Accepted by EMNLP 2025 Main Conference |
-| **2025.11** | Codebase publicly released on GitHub |
-| **2025.12** | Will add multimodal DocTree + more benchmarks |
-
----
 
 ## 📚 Citation
 
 ```bibtex
-@article{guo2025tom,
-  title   = {ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models},
-  author  = {Guo, Jiani and Li, Zuchao and Wu, Jie and Wang, Qianren and Li, Yun and Zhang, Lefei and Zhao, Hai and Yang, Yujiu},
-  journal = {arXiv preprint arXiv:2511.00489},
-  year    = {2025}
+@misc{guo2025tomleveragingtreeorientedmapreduce,
+      title={ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models}, 
+      author={Jiani Guo and Zuchao Li and Jie Wu and Qianren Wang and Yun Li and Lefei Zhang and Hai Zhao and Yujiu Yang},
+      year={2025},
+      eprint={2511.00489},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2511.00489}, 
 }
+
 ```
 
-_Official EMNLP 2025 citation will be added once proceedings are published._
+
 
 ---
 
 ## 🤝 Contributing
 
-We welcome:
 
-- new reasoning strategies
-- alternative DocTree construction methods
-- multimodal long-context datasets
 
 Submit issues or PRs directly via GitHub.
