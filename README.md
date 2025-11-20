@@ -38,7 +38,6 @@ This enables **global reasoning across long-range dependencies**, avoids redunda
 - **Efficient + Effective** — fewer API calls than some multi-agent baselines, better accuracy on 100k+ contexts  
 - **Strong empirical results** on LongBench & InfiniteBench with GPT-4o, Qwen2.5-72B, DeepSeek-V3, DeepSeek-R1
 
-> ToM achieves *state-of-the-art performance* on ultra-long QA tasks while requiring fewer inference rounds than LongAgent.
 
 ---
 
