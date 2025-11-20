@@ -1,0 +1,12 @@
+FlagEmbedding
+numpy
+pandas
+requests
+scikit-learn
+scipy
+tiktoken
+torch
+tqdm
+openai
+transformers
+umap-learn
