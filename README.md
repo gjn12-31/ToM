@@ -1,118 +1,159 @@
-# ToM
-Official repository of paper *ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models*
-# ToM Project
 
-End-to-end pipeline for processing long documents, structuring them with LLMs, reasoning over the resulting trees, and evaluating QA outputs.
+# ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models
 
-- `HSP/`: text chunking, DeepSeek API calls to build hierarchical structures, and a RAPTOR-style regrouping pass.
-- `Reasoning/`: asynchronous MapReduce reasoning over the tree structure.
-- `Evaluate/`: simple F1 calculation script.
+> ✅ **Accepted by EMNLP 2025 (Main Conference)**  
+> 📄 Official implementation of the paper  
+> _“ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models”_
 
-## Project Layout
+- **Paper (arXiv)**: https://arxiv.org/abs/2511.00489  
+- **Code**: https://github.com/gjn12-31/ToM  
+
+---
+
+## 🚀 What is ToM?
+
+ToM is a **tree-oriented MapReduce framework** for **long-context reasoning** with Large Language Models (LLMs). It addresses the limitations of:
+
+- **Retrieval-Augmented Generation (RAG)**, which relies on similarity-based ranking over flat chunks and often breaks logical coherence.
+- **Divide-and-Conquer Frameworks (DCF)**, which process chunks in isolation and struggle to capture long-range dependencies or resolve conflicts across distant segments.
+
+Instead of treating text as flat sequences, ToM constructs a **hierarchical DocTree** that mirrors natural document structure (headings → subtopics → details), then performs **recursive MapReduce reasoning**:
+
+### **Core Workflow**
+
+| Stage | Function |
+|-------|----------|
+| **Hierarchical Semantic Parsing (HSP)** | Converts each chunk into subtrees using weakly supervised structure extraction |
+| **DocTree Construction** | Aggregates subtree roots bottom-up using clustering + summarization |
+| **Tree-based MapReduce** | Map (local reasoning per node) → Reduce (conflict resolution & aggregation) |
+
+This enables **global reasoning across long-range dependencies**, avoids redundant reasoning, and yields higher factual consistency.
+
+---
+
+## 📊 Key Contributions
+
+- **DocTree Representation** — preserves both fine-grained and global structure  
+- **Conflict-aware MapReduce** — produces aggregated rationales with confidence scoring  
+- **Efficient + Effective** — fewer API calls than some multi-agent baselines, better accuracy on 100k+ contexts  
+- **Strong empirical results** on LongBench & InfiniteBench with GPT-4o, Qwen2.5-72B, DeepSeek-V3, DeepSeek-R1
+
+> ToM achieves *state-of-the-art performance* on ultra-long QA tasks while requiring fewer inference rounds than LongAgent.
+
+---
+
+## 📂 Project Layout
 
 ```
 ToM/
 ├── HSP/
-│   ├── main.py          # chunking + similarity filtering + DeepSeek inference + tree merge
-│   ├── raptor.py        # RAPTOR clustering and tree rebuilding
+│   ├── main.py          # chunking + similarity filtering + HSP inference + tree merge
+│   ├── raptor.py        # RAPTOR-style clustering and tree rebuilding
 │   ├── util.py          # helpers for chunking, parsing, merging
-│   └── prompts.py       # prompt templates for structuring
+│   └── prompts.py       # prompt templates for hierarchical semantic parsing
 ├── Reasoning/
 │   ├── api.py           # DeepSeek / GPT-4o / qwq API wrappers
-│   ├── pipeline.py      # async MapReduce pipeline
-│   ├── prompts.py       # map/reduce prompts
+│   ├── pipeline.py      # async MapReduce reasoning pipeline over DocTree
+│   ├── prompts.py       # map / reduce prompts
 │   └── main.py          # batch processing entry point
 ├── Evaluate/
-│   └── caculate_f1.py   # QA F1 scoring
+│   └── caculate_f1.py   # QA F1 scoring script
 └── requirements.txt
 ```
 
-## Environment
+---
 
-1. Python ≥ 3.9.
-2. Install dependencies:
+## 🛠 Environment Setup
+
+### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Export the DeepSeek API key (used by both HSP and Reasoning):
+### 2. Export API Keys
 
 ```bash
-export DEEPSEEK_API_KEY="your_key"
+export DEEPSEEK_API_KEY="your_key_here"
 ```
 
-`Reasoning/api.py` also includes optional integrations for GPT-4o (`call_gpt4`) and `qwq`; configure their credentials as needed.
+Optional:
+- GPT-4o
+- Qwen
+- qwq
 
-## HSP Module
+Modify `Reasoning/api.py` if needed.
 
-### 1. Chunking + Structuring (`HSP/main.py`)
+---
 
-- `split_text_into_token_blocks` (in `util.py`) uses `tiktoken` to split text by token count.
-- `filter_blocks_by_similarity` filters blocks via BGE embeddings + cosine similarity.
-- `run_inference` runs multi-threaded DeepSeek calls using the prompt defined in `HSP/prompts.py`.
+## 🌲 HSP Module (`HSP/`)
 
-Before running, set:
-
-```python
-input_file = "<path to JSONL with context>"
-output_dir = "<directory for outputs>"
-top_k_values = [3]  # any list of k values you need
-```
-
-Then:
+### Run hierarchical parsing
 
 ```bash
 python HSP/main.py
 ```
 
-Key outputs:
-- `processed_results_topk_*.json`: merged trees for each top-k setting.
-- `structured_blocks.json`, `debug_blocks_*.json`: intermediate data for debugging.
+Set parameters in file, e.g.:
 
-### 2. RAPTOR Clustering (`HSP/raptor.py`)
-
-Consumes the trees produced above and performs bottom-up clustering to build higher-level summaries.
-
-Set `input_file` / `output_file` near the bottom of the script and run:
-
-```bash
-python HSP/raptor.py
+```python
+input_file = "<path_to_JSONL>"
+output_dir = "<directory>"
+top_k_values = [3]
 ```
 
-## Reasoning Module
+Outputs include:
 
-`Reasoning/main.py` loads a tree dataset and runs asynchronous MapReduce reasoning.
+| File | Purpose |
+|------|---------|
+| `structured_blocks.json` | chunk-level subtree structures |
+| `processed_results_topk_*.json` | merged trees |
+
+---
+
+## 🧠 Tree-oriented MapReduce (`Reasoning/`)
+
+### Configure
 
 ```python
 config = {
-    'input_path': '<path to tree JSON>',
-    'output_path': '<path to store predictions>',
-    'model_path': None,          # remain None for API mode
-    'max_workers': 4,
-    'max_concurrent': 10
+    "input_path": "<tree_json>",
+    "output_path": "<prediction_path>",
+    "model_path": None,
+    "max_workers": 4,
+    "max_concurrent": 10
 }
 ```
 
-Run:
+### Run reasoning
 
 ```bash
 python Reasoning/main.py
 ```
 
-How it works:
-- `pipeline.py` traverses the tree level by level, spawning map tasks and reduce tasks via DeepSeek batch APIs.
-- Each result entry contains `prediction` plus `structured_info` (key_info, reasoning_process, answer, confidence_score).
+Result example:
 
-## Evaluation
+```json
+{
+  "question": "...",
+  "prediction": "...",
+  "structured_info": {
+    "rationale": "...",
+    "answer": "...",
+    "confidence_score": 0.92
+  }
+}
+```
 
-`Evaluate/caculate_f1.py` computes F1 between `prediction` and ground-truth answers:
+---
+
+## 📏 Evaluation
 
 ```bash
 python Evaluate/caculate_f1.py
 ```
 
-Set `file_path` to a JSON file containing entries like:
+Input format:
 
 ```json
 {
@@ -122,19 +163,39 @@ Set `file_path` to a JSON file containing entries like:
 }
 ```
 
-The script reports average F1 (ignoring blank predictions).
+---
 
-## Tips & Customization
+## 📣 News
 
-- **Concurrency tuning**: adjust thread counts in `HSP/main.py` (`ThreadPoolExecutor`) and batch sizes in `Reasoning/pipeline.py` for your hardware.
-- **Prompts**: edit `HSP/prompts.py` or `Reasoning/prompts.py` to change formatting requirements or reasoning style.
-- **Retry/backoff**: `chat`, `run_inference`, and related helpers already include retry logic; tweak retry counts or delays if needed.
+| Date | Update |
+|------|--------|
+| **2025.11** | 🎉 Accepted by EMNLP 2025 Main Conference |
+| **2025.11** | Codebase publicly released on GitHub |
+| **2025.12** | Will add multimodal DocTree + more benchmarks |
 
-## Contributing
+---
 
-Feel free to fork and open pull requests. Common extension points:
-- Add new API wrappers in `Reasoning/api.py`.
-- Enhance evaluation scripts in `Evaluate/`.
-- Improve chunking or tree-merging strategies in `HSP/util.py`.
+## 📚 Citation
 
-Bug reports and feature requests are welcome through GitHub Issues.
+```bibtex
+@article{guo2025tom,
+  title   = {ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models},
+  author  = {Guo, Jiani and Li, Zuchao and Wu, Jie and Wang, Qianren and Li, Yun and Zhang, Lefei and Zhao, Hai and Yang, Yujiu},
+  journal = {arXiv preprint arXiv:2511.00489},
+  year    = {2025}
+}
+```
+
+_Official EMNLP 2025 citation will be added once proceedings are published._
+
+---
+
+## 🤝 Contributing
+
+We welcome:
+
+- new reasoning strategies
+- alternative DocTree construction methods
+- multimodal long-context datasets
+
+Submit issues or PRs directly via GitHub.
