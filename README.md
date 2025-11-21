@@ -11,8 +11,9 @@
 ## 🚀 What is ToM?
 
 <p align="center">
-  <img src="figure1.png" width="800" alt="Figure 1: Overview of ToM Framework"/>
+  <img src="figure1.png" alt="Figure 1: Overview of ToM Framework" style="max-width: 100%; height: auto;">
 </p>
+
 
 ToM is a **tree-oriented MapReduce framework** for **long-context reasoning** with Large Language Models (LLMs). It addresses the limitations of:
 
