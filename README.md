@@ -170,14 +170,24 @@ Input format:
 ## 📚 Citation
 
 ```bibtex
-@misc{guo2025tomleveragingtreeorientedmapreduce,
-      title={ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models}, 
-      author={Jiani Guo and Zuchao Li and Jie Wu and Qianren Wang and Yun Li and Lefei Zhang and Hai Zhao and Yujiu Yang},
-      year={2025},
-      eprint={2511.00489},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2511.00489}, 
+@inproceedings{guo-etal-2025-tom,
+    title = "{T}o{M}: Leveraging Tree-oriented {M}ap{R}educe for Long-Context Reasoning in Large Language Models",
+    author = "Guo, Jiani  and
+      Li, Zuchao  and
+      Wu, Jie  and
+      Wang, Qianren  and
+      Li, Yun  and
+      Zhang, Lefei  and
+      Zhao, Hai  and
+      Yang, Yujiu",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    publisher = "Association for Computational Linguistics",
+    doi = "10.18653/v1/2025.emnlp-main.899",
+    ISBN = "979-8-89176-332-6",
 }
 
 ```
