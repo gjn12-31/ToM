@@ -2,8 +2,6 @@
 # ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models
 
 > ✅ **Accepted by EMNLP 2025 (Main Conference)**  
-> 📄 Official implementation of the paper  
-> _“ToM: Leveraging Tree-oriented MapReduce for Long-Context Reasoning in Large Language Models”_
 
 - **Paper (arXiv)**: https://arxiv.org/abs/2511.00489  
 - **Code**: https://github.com/gjn12-31/ToM  
@@ -75,11 +73,6 @@ pip install -r requirements.txt
 ```bash
 export DEEPSEEK_API_KEY="your_key_here"
 ```
-
-Optional:
-- GPT-4o
-- Qwen
-- qwq
 
 Modify `Reasoning/api.py` if needed.
 
