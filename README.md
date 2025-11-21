@@ -30,6 +30,10 @@ Instead of treating text as flat sequences, ToM constructs a **hierarchical DocT
 | **DocTree Construction** | Aggregates subtree roots bottom-up using clustering + summarization |
 | **Tree-based MapReduce** | Map (local reasoning per node) → Reduce (conflict resolution & aggregation) |
 
+<p align="center">
+  <img src="figure2.png" alt="Figure 1: Overview of ToM Framework" style="max-width: 100%; height: auto;">
+</p>
+
 This enables **global reasoning across long-range dependencies**, avoids redundant reasoning, and yields higher factual consistency.
 
 ---
