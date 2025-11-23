@@ -8,16 +8,11 @@
 
 ### 👥 Authors
 
-[**Jiani Guo**](https://scholar.google.com/citations?user=fZ4lXDoAAAAJ&hl=zh-CN)† ·  [**Zuchao Li**](#)† ·  
-[**Jie Wu**](#)* ·  
-[**Qianren Wang**](#) ·  
-[**Yun Li**](#) ·  
-[**Lefei Zhang**](#) ·  
-[**Hai Zhao**](#) ·  
-[**Yujiu Yang**](#)
+**Jiani Guo** [(Homepage)](https://scholar.google.com/citations?user=fZ4lXDoAAAAJ&hl=zh-CN) * · **Zuchao Li** [(Homepage)](#) † · **Jie Wu** [(Homepage)](#) * · **Qianren Wang** [(Homepage)](#) · **Yun Li** [(Homepage)](#) · **Lefei Zhang** [(Homepage)](#) · **Hai Zhao** [(Homepage)](#) · **Yujiu Yang** [(Homepage)](#)
 
 \* Equal contribution  
-† Corresponding authors (add actual footnote if needed)
+† Corresponding authors
+
 
 ---
 
