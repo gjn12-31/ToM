@@ -8,8 +8,7 @@
 
 ### 👥 Authors
 
-[**Jiani Guo**](https://scholar.google.com/citations?user=fZ4lXDoAAAAJ&hl=zh-CN)† ·  
-[**Zuchao Li**](#)† ·  
+[**Jiani Guo**](https://scholar.google.com/citations?user=fZ4lXDoAAAAJ&hl=zh-CN)† ·  [**Zuchao Li**](#)† ·  
 [**Jie Wu**](#)* ·  
 [**Qianren Wang**](#) ·  
 [**Yun Li**](#) ·  
