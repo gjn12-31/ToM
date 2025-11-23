@@ -4,7 +4,21 @@
 > ✅ **Accepted by EMNLP 2025 (Main Conference)**  
 
 - **Paper (arXiv)**: https://arxiv.org/abs/2511.00489  
-- **Code**: https://github.com/gjn12-31/ToM  
+- **Code**: https://github.com/gjn12-31/ToM
+
+### 👥 Authors
+
+[**Jiani Guo**](https://scholar.google.com/citations?user=fZ4lXDoAAAAJ&hl=zh-CN)† ·  
+[**Zuchao Li**](#)† ·  
+[**Jie Wu**](#)* ·  
+[**Qianren Wang**](#) ·  
+[**Yun Li**](#) ·  
+[**Lefei Zhang**](#) ·  
+[**Hai Zhao**](#) ·  
+[**Yujiu Yang**](#)
+
+\* Equal contribution  
+† Corresponding authors (add actual footnote if needed)
 
 ---
 
